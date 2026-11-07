@@ -1,7 +1,7 @@
 prog=wam
 
 ccflags=-pthread
-ldflags=-pthread -lX11 -lfltk
+ldflags=-pthread $(shell fltk-config --ldflags) # old: ldflags=-pthread -lX11 -lfltk
 
 ld=g++
 

@@ -1,4 +1,4 @@
-# HW 3 - Execution Integrity and Do Process
+# HW 4 - Whack-a-mole and Race Conditions
 
 * Author: Leo Haener-Pope
 * Class: CS452 Section #002
