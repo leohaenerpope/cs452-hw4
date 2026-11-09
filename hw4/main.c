@@ -5,7 +5,6 @@
 
 #include "lawn.h"
 #include "mole.h"
-#include "deq.h"
 #include "threads.h"
 #include "mtq.h"
  

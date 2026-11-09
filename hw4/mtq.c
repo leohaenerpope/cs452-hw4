@@ -5,6 +5,7 @@
 #include "mtq.h"
 #include "error.h"
 
+// struct rep for mtq data, has mutex info and capacity for amount of things to possibly be operating at same time on it
 typedef struct {
     Deq q;
     int capacity;
@@ -20,7 +21,7 @@ static Rep rep(Mtq q) {
 
 extern Mtq mtq_new(int capacity) {
     Rep r = malloc(sizeof(*r));
-    if (!r) ERROR("malloc failed in mtq.c mtw_new()");
+    if (!r) ERROR("malloc failed in mtq.c mtq_new()");
 
     r->q = deq_new();
     r->capacity = capacity;
@@ -31,7 +32,6 @@ extern Mtq mtq_new(int capacity) {
 
     return r;
 }
-
 extern int  mtq_len(Mtq q) {
     Rep r = rep(q);
     pthread_mutex_lock(&r->mutex);

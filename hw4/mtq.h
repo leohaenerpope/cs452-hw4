@@ -2,6 +2,8 @@
 // Basically just does the deq function you want but utilizes mutexes and mutex conditions to make sure
 // the action being performed is multi-thread safe (no other thread is doing something to it while current thread is doing something)
 
+// See deq.h for further definitions of functions
+
 #ifndef MTQ_H
 #define MTQ_H
 

@@ -6,44 +6,40 @@
 
 ## Overview
 
-This is a C implementation of a shell terminal program. It features sequencing, pipelining, and background capabilities
-along with some built in commands `history pwd cd exit`.
+This is a simple whack-a-mole style program that utilizes multithreading, mutexes, and the previous deq we have made.
 
 ## Reflection
 
-This assignment was pretty interesting for me to do. It kind of reminded me of the interpreter assignments from CS354, but this was definitely pretty different. I think that it gave me more experience with other C libraries and made concepts of process management more apparent to me. I was confused on where to start, since I was unfamiliar with how things were working with this C program, and really where I needed to change things at. I ultimately did most of my changes in the Command.c file as well as the Pipeline.c file.
+This was a nice assignment for getting more used to multi-threaded programming in c. I think I have a decent understanding of multi-threaded programming, though I am definitely not confident at doing it, especially in c. It gave me a deeper understanding with using mutexes, and the c library functions for the multithreading and mutex functionality.
 
-I think that the testing suite was really helpful and I also liked being able to run the terminal and test things out on my own computer. The most fun part of this assignment was designing the built in functions like cd and history, because that let me be creative with what I was doing and it felt like I wasn't relying a lot on google search and Gemini to understand what sort of C shenanigans were going on, though I think I am getting better with C. I think that I just have a tough time on these assignments because I have only ever had the one intro to C class before, and this stuff is pretty complex for the amount of C experience that I have and it makes me pretty uncomfortable with working with the code and kind of freezes me up. I should read the book more.
+It was a pretty straightforward assignment, which was nice because I think the subject it covers can definitely get super complicated easy. I ran into problems using the fltk library for getting the window pop up. It was working okay when I first started the assingment, after I changed a line in the small makefile (see Compiling and Using), however, it started to not work, which was weird because the DISPLAY commands + valgrind worked fine for me in the terminal. It may be something with the code I wrote, but it also might just be something weird with the Ubuntu WSL I am using on my computer. I still had fun with this assignment though.
 
 ## Compiling and Using
 
-To run the shell, simply use
-`make run`
-and the shell terminal program will start up in the console.
+Make the program first using `make`
+
+To run the program (with fltk properly set up) you can just use `make run`
+
+If ftlk is not properly set up or not working (which is was I had to deal with a lot) run `DISPLAY= make run`
+
+Note that I also changed in the small makefile `ldflags=-pthread $(shell fltk-config --ldflags) # old: ldflags=-pthread -lX11 -lfltk`, this was able to get the window to actually pop up for me.
 
 ## Testing
 
-To run testing suite, simply use
-`make test`
-To run all the tests.
+Run valgrind to test the program and check for leaks
 
-Run valgrind with testing suite
-`VG=1 Test/run shell`
-
-Run valgrind with a shell session with
 `make`
-`./vg ./shell`
 
-For me, the background test `bg3` would fail occasionally as it seemed the child proccess of printing /var would be completed instantly, making /var be the output first then the foreground process after (which should print /etc) would be then printed. (Though I think the /etc should print first if we are wanting to make the child process run in the background while letting other foreground commands go at the same time)
+`DISPLAY = ./vg ./wam'
 
-Also note that this assumes that a /var and /etc folder are available on your system (linux). For me, I am running WSL Ubuntu.
+Or with fltk properly installed (which I had trouble doing) you should be able to run `make valgrind`
 
 ## Results
 
-Most of the tests that I have created within the testing suite pass well. As mentioned above in the testing section, there are some finicky tests for using the & background sign in the shell, but I think that they are working as I intended (hopefully).
+I had a lot of trouble using the fltk resource with this project. I had it running pretty well in the beginning of the project. I do not know what happened, or if there is something weird with the code that I created, but now when I try to run the new window it just creates a blank window.
 
-I believe that running valgrind also proves that memory is managed correctly, accounting for certain library command usage.
+Though, when just using the DISPLAY commands, the program is able to run, also running and passing valgrind tests.
 
 ## References
 
-Gemini was helpful for figuring out the C libraries/functions necessary for this, as well as debugging.
+Gemini was helpful for trying to get the fltk working, and also explaining c library functions/syntax
