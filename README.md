@@ -30,7 +30,7 @@ Run valgrind to test the program and check for leaks
 
 `make`
 
-`DISPLAY = ./vg ./wam'
+`DISPLAY = ./vg ./wam`
 
 Or with fltk properly installed (which I had trouble doing) you should be able to run `make valgrind`
 
